@@ -9,9 +9,11 @@ class TaskDatabase {
   static const String _title = 'title';
   static const String _description = 'description';
   static const String _priority = 'priority';
+  static const String _isChecked = 'isChecked';
+
 
   static const String createTableSQL =
-      'CREATE TABLE $_tableName($_id INTEGER NOT NULL PRIMARY KEY,$_title TEXT,$_description TEXT, $_priority TEXT)';
+      'CREATE TABLE $_tableName($_id INTEGER NOT NULL PRIMARY KEY,$_title TEXT,$_description TEXT, $_priority TEXT, $_isChecked INTEGER NOT NULL)';
 
   Future<Database> _getDatabase() async {
     final String path = join(await getDatabasesPath(), 'tasks.db');
@@ -59,13 +61,13 @@ class TaskDatabase {
   }
 
   Future<List<Task>> findAll() async {
-    print('FIND ALL');
+    // print('FIND ALL');
 
     final Database database = await _getDatabase();
 
     final List<Map<String, dynamic>> result = await database.query(_tableName);
 
-    print(result);
+    // print(result);
 
     return result.map((item) => Task.fromMap(item)).toList();
   }

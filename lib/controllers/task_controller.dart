@@ -11,7 +11,7 @@ class TaskController implements TaskUsecases {
   }
 
   @override
-  Future<List<Task>> getTasks(Task task) async {
+  Future<List<Task>> getTasks() async {
     return await _taskDatabase.findAll();
   }
 

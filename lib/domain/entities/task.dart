@@ -6,11 +6,14 @@ class Task {
   String title;
   String description;
   String priority;
+  bool isChecked;
+
   Task({
     this.id,
     required this.title,
     required this.description,
     required this.priority,
+    required this.isChecked,
   });
 
   Map<String, dynamic> toMap() {
@@ -19,6 +22,8 @@ class Task {
       'title': title,
       'description': description,
       'priority': priority,
+      // columnDone: done == true ? 1 : 0
+      'isChecked': isChecked == true ? 1 : 0,
     };
   }
 
@@ -28,6 +33,8 @@ class Task {
       title: map['title'] as String,
       description: map['description'] as String,
       priority: map['priority'] as String,
+      // done = map[columnDone] == 1;
+      isChecked: map['isChecked'] == 1,
     );
   }
 
