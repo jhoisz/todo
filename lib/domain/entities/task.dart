@@ -43,8 +43,10 @@ class Task {
   factory Task.fromJson(String source) =>
       Task.fromMap(json.decode(source) as Map<String, dynamic>);
 
+
+
   @override
   String toString() {
-    return 'Task(id: $id, title: $title, description: $description, priority: $priority)';
+    return 'Task(id: $id, title: $title, description: $description, priority: $priority, isChecked: $isChecked)';
   }
 }
