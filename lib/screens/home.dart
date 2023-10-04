@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo/screens/components/no_tasks.dart';
 
 import '../controllers/task_controller.dart';
 import '../domain/entities/task.dart';
 import '../themes/theme.dart';
-import 'components/no_tasks.dart';
+import 'components/task_list.dart';
 import 'new_task.dart';
 
 class Home extends StatefulWidget {
@@ -40,20 +41,15 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'My tasks',
+            'Minhas tarefas',
             style: ThemeStyle.titleStyle,
           ),
+          centerTitle: true,
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: AppColors.primary,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const NewTask(),
-              ),
-            );
-          },
+          onPressed: () => dialogNewTask(context),
+          elevation: 2.0,
           child: const Icon(
             Icons.add,
             color: Colors.white,
@@ -63,7 +59,6 @@ class _HomeState extends State<Home> {
         body: FutureBuilder(
           future: _tasks,
           builder: (context, snapshot) {
-            print('teste');
             final ConnectionState connectionState = snapshot.connectionState;
             final tasks = snapshot.data;
             switch (connectionState) {
@@ -77,7 +72,7 @@ class _HomeState extends State<Home> {
                       child: CircularProgressIndicator(),
                     );
                   } else {
-                    return const NoTasks();
+                    return const Center(child: NoAllTasks());
                   }
                 } else {
                   return Padding(
@@ -85,14 +80,9 @@ class _HomeState extends State<Home> {
                     child: CustomScrollView(
                       slivers: [
                         const SliverToBoxAdapter(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              bottom: 20.0,
-                            ),
-                            child: Text(
-                              'To do',
-                              style: ThemeStyle.subTitleStyle,
-                            ),
+                          child: Text(
+                            'A fazer',
+                            style: ThemeStyle.subTitleStyle,
                           ),
                         ),
                         TasksList(
@@ -106,7 +96,7 @@ class _HomeState extends State<Home> {
                         ),
                         const SliverToBoxAdapter(
                           child: Text(
-                            'Done',
+                            'Feito',
                             style: ThemeStyle.subTitleStyle,
                           ),
                         ),
@@ -134,57 +124,24 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-}
 
-class TasksList extends StatefulWidget {
-  const TasksList({
-    super.key,
-    required this.tasks,
-    required this.updateTask,
-  });
-  final List<Task> tasks;
-  final Function(Task) updateTask;
-
-  @override
-  State<TasksList> createState() => _TasksListState();
-}
-
-class _TasksListState extends State<TasksList> {
-  @override
-  Widget build(BuildContext context) {
-    return SliverList.builder(
-      itemCount: widget.tasks.length,
-      itemBuilder: (context, index) {
-        return CheckboxListTile(
-          value: widget.tasks[index].isChecked,
-          onChanged: (value) async {
-            final Task task = Task(
-              id: widget.tasks[index].id,
-              title: widget.tasks[index].title,
-              description: widget.tasks[index].description,
-              priority: widget.tasks[index].priority,
-              isChecked: !widget.tasks[index].isChecked,
-            );
-            widget.updateTask(task);
+  Future<String?> dialogNewTask(BuildContext context) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text(
+          'Nova tarefa',
+          textAlign: TextAlign.center,
+          style: ThemeStyle.titleStyle,
+        ),
+        content: NewTask(
+          updateTasks: (value) async {
+            await taskController.addTask(value);
+            refreshList();
           },
-          title: Text(widget.tasks[index].title),
-          subtitle: const Text(
-            '12:00',
-            style: ThemeStyle.cardTimeText,
-          ),
-          secondary: const Icon(
-            Icons.circle,
-            color: AppColors.lowPriority,
-            size: 20.0,
-          ),
-          tileColor: Colors.white,
-          shape: ContinuousRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              16.0,
-            ),
-          ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
+

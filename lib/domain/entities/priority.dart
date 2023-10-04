@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
- enum Priority {
-  low(label: 'Baixa', color: Colors.green),
-  normal(label: 'Média', color: Colors.blue),
-  high(label: 'Alta', color: Colors.red);
+import '../../themes/theme.dart';
 
-  final String label;
-  final Color color;
-
-  const Priority({required this.label, required this.color});
-}
+Map<String, Color> priorities = {
+  'Baixa': AppColors.lowPriority,
+  'Normal': AppColors.normalPriority,
+  'Alta': AppColors.highPriority
+};

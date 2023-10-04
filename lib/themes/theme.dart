@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
 final ThemeData mytheme = ThemeData(
-  fontFamily: 'Inter',
-  colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+  fontFamily: 'Jost',
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
   useMaterial3: true,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.background,
+  ),
+  snackBarTheme: const SnackBarThemeData(
+    backgroundColor: AppColors.primary,
+  ),
 );
 
 abstract class ThemeStyle {
@@ -11,6 +17,7 @@ abstract class ThemeStyle {
     fontSize: 24.0,
     fontWeight: FontWeight.bold,
     color: AppColors.textColor,
+    fontFamily: 'Philosopher',
   );
   static const TextStyle subTitleStyle = TextStyle(
     fontSize: 18.0,
@@ -46,4 +53,5 @@ abstract class AppColors {
   static const Color normalPriority = Color(0xFFC6CBFE);
   static const Color textColor = Color(0xFF464646);
   static const Color background = Color(0xFFF8F8F8);
+  static const Color cancelButton = Color(0xFFF28705);
 }
