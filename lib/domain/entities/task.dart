@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Task {
@@ -22,7 +21,6 @@ class Task {
       'title': title,
       'description': description,
       'priority': priority,
-      // columnDone: done == true ? 1 : 0
       'isChecked': isChecked == true ? 1 : 0,
     };
   }
@@ -33,7 +31,6 @@ class Task {
       title: map['title'] as String,
       description: map['description'] as String,
       priority: map['priority'] as String,
-      // done = map[columnDone] == 1;
       isChecked: map['isChecked'] == 1,
     );
   }
@@ -42,7 +39,6 @@ class Task {
 
   factory Task.fromJson(String source) =>
       Task.fromMap(json.decode(source) as Map<String, dynamic>);
-
 
 
   @override
