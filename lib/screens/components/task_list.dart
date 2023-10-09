@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../controllers/task_controller.dart';
 import '../../domain/entities/priority.dart';
 import '../../domain/entities/task.dart';
 import '../../themes/theme.dart';
@@ -19,6 +20,8 @@ class TasksList extends StatefulWidget {
 }
 
 class _TasksListState extends State<TasksList> {
+  final TaskController _taskController = TaskController();
+
   @override
   Widget build(BuildContext context) {
     return widget.tasks.isNotEmpty
@@ -27,9 +30,10 @@ class _TasksListState extends State<TasksList> {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: CheckboxListTile(
-                  value: widget.tasks[index].isChecked,
-                  onChanged: (value) async {
+                child: Dismissible(
+                  key: Key(widget.tasks[index].id.toString()),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
                     final Task task = Task(
                       id: widget.tasks[index].id,
                       title: widget.tasks[index].title,
@@ -37,28 +41,64 @@ class _TasksListState extends State<TasksList> {
                       priority: widget.tasks[index].priority,
                       isChecked: !widget.tasks[index].isChecked,
                     );
-                    widget.updateTask(task);
+
+                    _taskController.removeTask(task);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Tarefa apagada!'),
+                      ),
+                    );
                   },
-                  title: Text(widget.tasks[index].title),
-                  subtitle: const Text(
-                    '12:00',
-                    style: ThemeStyle.cardTimeText,
+                  background: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        16.0,
+                      ),
+                      color: AppColors.highPriority,
+                    ),
+                    child: const Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                  secondary: Icon(
-                    Icons.circle,
-                    color: priorities[widget.tasks[index].priority],
-                    size: 20.0,
-                  ),
-                  tileColor: Colors.white,
-                  activeColor: Colors.white,
-                  side: const BorderSide(
-                    color: AppColors.primary,
-                    width: 1.0,
-                  ),
-                  checkColor: AppColors.primary,
-                  shape: ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      16.0,
+                  child: CheckboxListTile(
+                    value: widget.tasks[index].isChecked,
+                    onChanged: (value) async {
+                      final Task task = Task(
+                        id: widget.tasks[index].id,
+                        title: widget.tasks[index].title,
+                        description: widget.tasks[index].description,
+                        priority: widget.tasks[index].priority,
+                        isChecked: !widget.tasks[index].isChecked,
+                      );
+                      widget.updateTask(task);
+                    },
+                    title: Text(widget.tasks[index].title),
+                    subtitle: const Text(
+                      '12:00',
+                      style: ThemeStyle.cardTimeText,
+                    ),
+                    secondary: Icon(
+                      Icons.circle,
+                      color: priorities[widget.tasks[index].priority],
+                      size: 20.0,
+                    ),
+                    tileColor: Colors.white,
+                    activeColor: Colors.white,
+                    side: const BorderSide(
+                      color: AppColors.primary,
+                      width: 1.0,
+                    ),
+                    checkColor: AppColors.primary,
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        16.0,
+                      ),
                     ),
                   ),
                 ),
