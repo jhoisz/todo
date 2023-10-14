@@ -106,7 +106,7 @@ class _NewTaskState extends State<NewTask> {
                 });
               },
               borderRadius: BorderRadius.circular(12.0),
-              dropdownColor: Colors.white,
+              dropdownColor:  AppColors.softBlue,
               items: ['Baixa', 'Normal', 'Alta'].map<DropdownMenuItem<String>>(
                 (String value) {
                   return DropdownMenuItem<String>(

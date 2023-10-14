@@ -51,18 +51,21 @@ class _TasksListState extends State<TasksList> {
                     );
                   },
                   background: Container(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 16.0,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                         16.0,
                       ),
-                      color: AppColors.highPriority,
+                      color: AppColors.deleteColor,
                     ),
                     child: const Align(
                       alignment: Alignment.centerRight,
                       child: Icon(
                         Icons.delete,
-                        color: Colors.white,
+                        color: AppColors.softBlue,
                       ),
                     ),
                   ),
@@ -88,8 +91,8 @@ class _TasksListState extends State<TasksList> {
                       color: priorities[widget.tasks[index].priority],
                       size: 20.0,
                     ),
-                    tileColor: Colors.white,
-                    activeColor: Colors.white,
+                    tileColor: AppColors.softBlue,
+                    activeColor: AppColors.softBlue,
                     side: const BorderSide(
                       color: AppColors.primary,
                       width: 1.0,

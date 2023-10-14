@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
           elevation: 2.0,
           child: const Icon(
             Icons.add,
-            color: Colors.white,
+            color: AppColors.softBlue,
           ),
         ),
         backgroundColor: AppColors.background,
