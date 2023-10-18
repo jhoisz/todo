@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../domain/entities/task.dart';
-import '../themes/theme.dart';
-import 'components/custom_button.dart';
+import '../../domain/entities/task.dart';
+import '../../themes/theme.dart';
+import 'custom_button.dart';
 
 class NewTask extends StatefulWidget {
   const NewTask({super.key, required this.updateTasks});
@@ -106,7 +106,7 @@ class _NewTaskState extends State<NewTask> {
                 });
               },
               borderRadius: BorderRadius.circular(12.0),
-              dropdownColor:  AppColors.softBlue,
+              dropdownColor: AppColors.softBlue,
               items: ['Baixa', 'Normal', 'Alta'].map<DropdownMenuItem<String>>(
                 (String value) {
                   return DropdownMenuItem<String>(
@@ -128,6 +128,7 @@ class _NewTaskState extends State<NewTask> {
             CustomButton(
               title: 'Sair',
               colorButton: AppColors.cancelButton,
+              isCancel: true,
               action: () {
                 Navigator.pop(context);
               },
@@ -154,4 +155,3 @@ class _NewTaskState extends State<NewTask> {
     );
   }
 }
-
