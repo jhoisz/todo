@@ -8,11 +8,13 @@ class CustomButton extends StatelessWidget {
     required this.action,
     required this.title,
     required this.colorButton,
+    this.isCancel = false,
   });
 
   final Function() action;
   final String title;
   final Color colorButton;
+  final bool isCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class CustomButton extends StatelessWidget {
           child: Center(
             child: Text(
               title,
-              style: ThemeStyle.buttonText,
+              style: isCancel ? ThemeStyle.buttonCancelText : ThemeStyle.buttonText,
             ),
           ),
         ),
