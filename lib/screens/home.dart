@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo/screens/components/no_tasks.dart';
 
 import '../controllers/task_controller.dart';
 import '../domain/entities/task.dart';
 import '../themes/theme.dart';
+import 'components/new_task.dart';
+import 'components/no_tasks.dart';
 import 'components/task_list.dart';
-import 'new_task.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -134,14 +134,14 @@ class _HomeState extends State<Home> {
           textAlign: TextAlign.center,
           style: ThemeStyle.titleStyle,
         ),
+        backgroundColor: AppColors.background,
         content: NewTask(
           updateTasks: (value) async {
             await taskController.addTask(value);
             refreshList();
           },
         ),
-      ),
+              ),
     );
   }
 }
-
