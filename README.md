@@ -1,23 +1,18 @@
 <h1 align="center"> Todo 📒 </h1>
 
 ## Sobre
-
-> 🚧 Em construção 🚧
+Projeto de lista de tarefas, nele utilizo conhecimentos de banco de dados para criar uma aplicação que lista tarefas e permite adiministrá-las.
 
 ## Funcionalidades
-
-> 🚧 Em construção 🚧
-
-<!--
-1. Listar artigos da API [Spaceflight](https://www.spaceflightnewsapi.net/);
-2. Favoritar e desfavoritar um artigo;
-3. Visualize artigos favoritados;
-4. Ver detalhes de um artigo.
+1. Listar todas as tarefas (a fazer e feitas);
+2. Adicionar uma nova tarefa;
+3. Excluir uma tarefa;
+4. Atualizar uma tarefa.
 
 <p align="center">
-  <img src='space_news.gif' alt= '' />
+  <img src='todo.gif' alt= '' />
 </p>
--->
+
 
 ## Tecnologias e bibliotecas
 
