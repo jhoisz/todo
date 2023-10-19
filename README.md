@@ -28,7 +28,7 @@ Primeiro você deve [instalar flutter](https://docs.flutter.dev/get-started/inst
 
 ```bash
 git clone https://github.com/jhoisz/todo
-cd space_news
+cd todo
 ```
 
 Agora, para testar, você deve instalar os pacotes/dependências e usar um dispositivo conectado ao seu computador ou usar um emulador:
